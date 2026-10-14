@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#111522" />
+  <title>给李怡的一封心意信</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --night: #111522;
+      --plum: #211a31;
+      --rose: #f2a9bd;
+      --cream: #fff4e9;
+      --soft: #d8cfdf;
+      --gold: #f4d49a;
+    }
+    * { box-sizing: border-box; }
+    html { min-height: 100%; scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background:
+        radial-gradient(ellipse at 50% 18%, rgba(116, 76, 121, .35), transparent 40%),
+        radial-gradient(ellipse at 8% 80%, rgba(70, 91, 131, .18), transparent 35%),
+        linear-gradient(160deg, var(--night), var(--plum) 65%, #171726);
+      color: var(--cream);
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+    button { font: inherit; }
+    .sky, .sky::before, .sky::after {
+      position: fixed; inset: 0; pointer-events: none; content: "";
+    }
+    .sky {
+      opacity: .62;
+      background-image:
+        radial-gradient(1px 1px at 12% 22%, #fff 98%, transparent),
+        radial-gradient(1px 1px at 79% 14%, #f8d9e4 98%, transparent),
+        radial-gradient(1px 1px at 68% 62%, #fff 98%, transparent),
+        radial-gradient(1.5px 1.5px at 24% 78%, #f4d49a 98%, transparent),
+        radial-gradient(1px 1px at 90% 83%, #fff 98%, transparent),
+        radial-gradient(1px 1px at 43% 9%, #fff 98%, transparent);
+      background-size: 310px 270px;
+      animation: drift 24s linear infinite;
+    }
+    .sky::before {
+      background: radial-gradient(ellipse at 50% 105%, rgba(243, 169, 189, .14), transparent 48%);
+    }
+    .wrap {
+      position: relative;
+      width: min(100% - 32px, 760px);
+      min-height: 100vh;
+      margin: auto;
+      padding: 34px 0 48px;
+      display: grid;
+      align-content: center;
+    }
+    .topline {
+      margin: 0 0 20px;
+      color: rgba(255,244,233,.65);
+      text-align: center;
+      font-size: 12px;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+    }
+    .card {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(26px, 7vw, 58px);
+      border: 1px solid rgba(255, 232, 222, .19);
+      border-radius: 30px;
+      background: linear-gradient(145deg, rgba(255,255,255,.075), rgba(255,255,255,.025));
+      box-shadow: 0 26px 90px rgba(0,0,0,.28), inset 0 1px rgba(255,255,255,.09);
+      backdrop-filter: blur(14px);
+    }
+    .card::before {
+      position: absolute; inset: 0; pointer-events: none; content: "";
+      background: linear-gradient(120deg, transparent 35%, rgba(255,255,255,.055), transparent 65%);
+      transform: translateX(-100%);
+      animation: sheen 9s ease-in-out infinite;
+    }
+    .hero { text-align: center; }
+    .moon { color: var(--gold); font-size: 24px; letter-spacing: .35em; }
+    h1 {
+      margin: 17px 0 12px;
+      font-size: clamp(32px, 8vw, 55px);
+      line-height: 1.18;
+      font-weight: 600;
+      letter-spacing: .04em;
+    }
+    .subtitle { margin: 0; color: var(--soft); font-size: 15px; line-height: 1.9; }
+    .envelope-area { display: grid; place-items: center; margin: 32px 0 18px; }
+    .envelope {
+      position: relative;
+      width: 174px;
+      height: 124px;
+      border: 1px solid rgba(255,255,255,.38);
+      border-radius: 13px;
+      background: linear-gradient(145deg, #d49aab, #a96d86);
+      box-shadow: 0 18px 38px rgba(8, 7, 18, .32);
+      cursor: pointer;
+      transition: transform .35s ease, filter .35s ease;
+    }
+    .envelope:hover { transform: translateY(-5px) rotate(-1deg); filter: brightness(1.08); }
+    .envelope::before {
+      position: absolute; inset: 0; content: "";
+      background: linear-gradient(33deg, transparent 49%, rgba(255,255,255,.22) 50%, transparent 51%),
+                  linear-gradient(-33deg, transparent 49%, rgba(73,35,62,.23) 50%, transparent 51%);
+      border-radius: inherit;
+    }
+    .envelope::after {
+      position: absolute; left: calc(50% - 17px); top: 43px; content: "♥";
+      color: #fff2ec; font-size: 34px;
+      filter: drop-shadow(0 2px 6px rgba(80, 30, 52, .25));
+    }
+    .tap-hint { color: rgba(255,244,233,.66); font-size: 13px; }
+    .step {
+      display: none;
+      margin: 28px auto 0;
+      max-width: 570px;
+      color: #fbf0e8;
+      font-size: clamp(16px, 3.7vw, 19px);
+      line-height: 2.05;
+      text-align: left;
+    }
+    .step.visible { display: block; animation: rise .75s cubic-bezier(.18,.75,.2,1) both; }
+    .step p { margin: 0 0 14px; }
+    .signature { margin-top: 24px !important; color: var(--rose); text-align: right; }
+    .divider { width: 64px; height: 1px; margin: 26px auto; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+    .controls { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: 27px; }
+    .btn {
+      min-height: 48px;
+      padding: 12px 20px;
+      border: 1px solid rgba(255,255,255,.24);
+      border-radius: 999px;
+      color: var(--cream);
+      background: rgba(255,255,255,.07);
+      cursor: pointer;
+      transition: transform .2s ease, background .2s ease, border-color .2s ease;
+    }
+    .btn:hover { transform: translateY(-2px); background: rgba(255,255,255,.13); border-color: rgba(255,255,255,.5); }
+    .btn:focus-visible, .star:focus-visible, .envelope:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; }
+    .btn.primary { color: #392433; border-color: transparent; background: linear-gradient(120deg, #ffd4d8, #f4d49a); font-weight: 650; }
+    .star-row { display: flex; justify-content: center; gap: 13px; margin: 20px 0 4px; }
+    .star {
+      width: 44px; height: 44px; border: 1px solid rgba(244,212,154,.38); border-radius: 50%;
+      color: rgba(244,212,154,.52); background: rgba(244,212,154,.04); font-size: 20px; cursor: pointer;
+      transition: color .25s ease, background .25s ease, transform .25s ease, box-shadow .25s ease;
+    }
+    .star.lit { color: #fff1bd; background: rgba(244,212,154,.18); box-shadow: 0 0 24px rgba(244,212,154,.32); transform: scale(1.08); }
+    .star-note { min-height: 26px; color: var(--gold); font-size: 13px; text-align: center; }
+    .choice { display: none; margin: 28px 0 0; text-align: center; animation: rise .7s ease both; }
+    .choice.visible { display: block; }
+    .choice h2 { margin: 0 0 10px; font-size: 22px; font-weight: 550; }
+    .choice p { margin: 0; color: var(--soft); font-size: 14px; line-height: 1.8; }
+    .response { min-height: 28px; margin: 18px 0 0 !important; color: var(--rose) !important; }
+    .fineprint { margin: 24px 0 0; color: rgba(255,244,233,.48); text-align: center; font-size: 11px; line-height: 1.7; }
+    .heart {
+      position: fixed; z-index: 3; bottom: -30px; pointer-events: none;
+      color: var(--rose); animation: float-up 3.8s ease-out forwards;
+      filter: drop-shadow(0 0 9px rgba(242,169,189,.38));
+    }
+    .spark {
+      position: fixed; z-index: 3; pointer-events: none; color: var(--gold);
+      animation: sparkle .8s ease-out forwards;
+    }
+    @keyframes rise { from { opacity: 0; transform: translateY(18px); filter: blur(4px); } to { opacity: 1; transform: translateY(0); filter: blur(0); } }
+    @keyframes drift { to { background-position: 310px 270px; } }
+    @keyframes sheen { 0%, 72%, 100% { transform: translateX(-100%); } 86% { transform: translateX(100%); } }
+    @keyframes float-up { to { transform: translate(var(--sway), -110vh) rotate(28deg); opacity: 0; } }
+    @keyframes sparkle { to { transform: translate(var(--dx), var(--dy)) scale(.1) rotate(80deg); opacity: 0; } }
+    @media (max-width: 520px) {
+      .wrap { width: min(100% - 20px, 760px); padding: 22px 0; }
+      .card { border-radius: 24px; }
+      .btn { flex: 1 1 100%; }
+      .star-row .star { flex: 0 0 44px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="sky" aria-hidden="true"></div>
+  <main class="wrap">
+    <p class="topline">a little note under the stars</p>
+    <section class="card" aria-labelledby="title">
+      <div class="hero">
+        <div class="moon" aria-hidden="true">☾　✦　☽</div>
+        <h1 id="title">有一封信，<br />想慢慢说给你听</h1>
+        <p class="subtitle">给李怡 · 来自易江山<br />今晚的星星很安静，刚好适合把心意说清楚。</p>
+        <div class="envelope-area">
+          <button class="envelope" id="open" aria-label="打开写给李怡的信"></button>
+        </div>
+        <p class="tap-hint" id="hint">轻轻点一下信封，开始这段小小旅程</p>
+      </div>
+
+      <article class="step" id="step1" aria-live="polite">
+        <p>李怡：</p>
+        <p>有些话在心里排练了好几遍，真要说出来，反而只剩下一句最简单的——认识你之后，平常的日子也多了几分期待。</p>
+        <p>我喜欢和你聊天时那种自然的感觉，也喜欢你认真做自己的样子。</p>
+      </article>
+
+      <div class="divider" id="divider" hidden></div>
+      <div class="star-row" id="stars" hidden aria-label="点亮三颗星星">
+        <button class="star" aria-label="点亮第一颗星">✦</button>
+        <button class="star" aria-label="点亮第二颗星">✦</button>
+        <button class="star" aria-label="点亮第三颗星">✦</button>
+      </div>
+      <p class="star-note" id="starNote" aria-live="polite"></p>
+
+      <article class="step" id="step2" aria-live="polite">
+        <p>所以，我想认真地告诉你：我对你有好感，也想多了解你一些。</p>
+        <p>如果你愿意，我们可以从一顿饭、一段散步，或者一次轻松的聊天开始。不急着给关系下定义，只一起看看相处起来是什么感觉。</p>
+      </article>
+
+      <div class="controls" id="continueControls" hidden>
+        <button class="btn primary" id="continue">继续读下去</button>
+      </div>
+
+      <section class="choice" id="choice" aria-live="polite">
+        <h2>你可以按自己的节奏回答</h2>
+        <p>不需要为了照顾我的心情而勉强答应。无论你的答案是什么，我都会认真尊重。</p>
+        <div class="controls">
+          <button class="btn primary answer" data-answer="太好了！那我们找个你喜欢的时间，慢慢聊。">我也愿意试着了解</button>
+          <button class="btn answer" data-answer="当然可以，我们慢慢来。谢谢你愿意告诉我真实的想法。">我想慢慢来</button>
+          <button class="btn answer" data-answer="收到，谢谢你坦诚告诉我。我会尊重你的感受，也祝你每天都有好心情。">我需要一点时间</button>
+        </div>
+        <p class="response" id="response"></p>
+        <p class="fineprint">这些按钮只会在当前页面显示回应，不会发送消息或记录你的选择。</p>
+      </section>
+      <p class="signature" id="signature" hidden>—— 易江山</p>
+    </section>
+    <p class="fineprint">一页只属于今晚的小心意 <span aria-hidden="true">·</span> 慢慢看，不着急</p>
+  </main>
+  <script>
+    const openButton = document.getElementById('open');
+    const hint = document.getElementById('hint');
+    const step1 = document.getElementById('step1');
+    const step2 = document.getElementById('step2');
+    const divider = document.getElementById('divider');
+    const stars = [...document.querySelectorAll('.star')];
+    const starNote = document.getElementById('starNote');
+    const continueControls = document.getElementById('continueControls');
+    const choice = document.getElementById('choice');
+    const response = document.getElementById('response');
+    const signature = document.getElementById('signature');
+    let litStars = 0;
+
+    function sprinkle(x, y, amount = 12) {
+      for (let i = 0; i < amount; i++) {
+        const particle = document.createElement('span');
+        particle.className = 'spark';
+        particle.textContent = i % 3 === 0 ? '✦' : '·';
+        particle.style.left = `${x}px`;
+        particle.style.top = `${y}px`;
+        particle.style.setProperty('--dx', `${(Math.random() - .5) * 150}px`);
+        particle.style.setProperty('--dy', `${(Math.random() - .5) * 120}px`);
+        document.body.appendChild(particle);
+        setTimeout(() => particle.remove(), 900);
+      }
+    }
+
+    function floatHearts(amount = 12) {
+      for (let i = 0; i < amount; i++) {
+        const heart = document.createElement('span');
+        heart.className = 'heart';
+        heart.textContent = i % 2 ? '♥' : '♡';
+        heart.style.left = `${8 + Math.random() * 84}vw`;
+        heart.style.fontSize = `${13 + Math.random() * 17}px`;
+        heart.style.setProperty('--sway', `${(Math.random() - .5) * 110}px`);
+        heart.style.animationDelay = `${Math.random() * .75}s`;
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 4700);
+      }
+    }
+
+    openButton.addEventListener('click', () => {
+      openButton.disabled = true;
+      openButton.style.transform = 'scale(.92)';
+      hint.textContent = '信已经打开了 ✨';
+      step1.classList.add('visible');
+      divider.hidden = false;
+      document.getElementById('stars').hidden = false;
+      starNote.textContent = '点亮三颗星，再继续读下一段';
+      const rect = openButton.getBoundingClientRect();
+      sprinkle(rect.left + rect.width / 2, rect.top + rect.height / 2, 18);
+    }, { once: true });
+
+    stars.forEach((star, index) => {
+      star.addEventListener('click', () => {
+        if (star.classList.contains('lit')) return;
+        star.classList.add('lit');
+        star.setAttribute('aria-pressed', 'true');
+        litStars++;
+        const rect = star.getBoundingClientRect();
+        sprinkle(rect.left + rect.width / 2, rect.top + rect.height / 2, 8);
+        starNote.textContent = litStars < 3 ? `已经点亮 ${litStars} 颗星，再点亮 ${3 - litStars} 颗` : '星星都亮起来了，下一段心意准备好了';
+        if (litStars === 3) continueControls.hidden = false;
+      }, { once: true });
+    });
+
+    document.getElementById('continue').addEventListener('click', () => {
+      step2.classList.add('visible');
+      choice.classList.add('visible');
+      signature.hidden = false;
+      continueControls.hidden = true;
+      document.getElementById('continue').closest('.controls').hidden = false;
+      document.getElementById('continue').textContent = '再读一遍';
+      document.getElementById('continue').onclick = () => {
+        step1.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        step1.classList.remove('visible');
+        void step1.offsetWidth;
+        step1.classList.add('visible');
+      };
+      floatHearts(16);
+      choice.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, { once: true });
+
+    document.querySelectorAll('.answer').forEach(button => {
+      button.addEventListener('click', () => {
+        response.textContent = button.dataset.answer;
+        document.querySelectorAll('.answer').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+        floatHearts(button === document.querySelector('.answer.primary') ? 18 : 7);
+      });
+    });
+  </script>
+</body>
+</html>
